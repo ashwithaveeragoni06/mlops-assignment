@@ -1,0 +1,17 @@
+data:
+  raw_path: data/raw/fraud_data.csv
+  processed_path: data/processed/processed_features.csv
+
+model:
+  type: RandomForestClassifier
+  n_estimators: 100
+  max_depth: 10
+  random_state: 42
+  test_size: 0.2
+
+mlflow:
+  experiment_name: fraud-detection
+  model_name: FraudDetectionModel
+
+monitoring:
+  drift_threshold: 0.1
