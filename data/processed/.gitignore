@@ -1,1 +1,4 @@
+data/processed/processed_features.parquet
+feast_repo/data/
+feast_env/
 /processed_features.csv
