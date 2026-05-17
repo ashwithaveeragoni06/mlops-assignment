@@ -30,3 +30,22 @@ End-to-end MLOps system for detecting credit card fraud.
 ## Quick Start
 
 ### 1. Clone repository
+## Screenshots
+
+### React Frontend
+![React Frontend](screenshots/frontend.png)
+
+### FastAPI Swagger Docs
+![FastAPI Docs](screenshots/api-docs.png)
+
+### MLflow Experiment Tracking
+![MLflow](screenshots/mlflow.png)
+
+### Evidently Drift Report
+![Evidently Report](screenshots/evidently-report.png)
+
+### GitHub Actions CI
+![GitHub Actions](screenshots/github-actions.png)
+
+### FastAPI Health Check
+![FastAPI Health](screenshots/api-health.png)
