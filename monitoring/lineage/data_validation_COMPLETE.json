@@ -1,0 +1,28 @@
+{
+  "eventType": "COMPLETE",
+  "eventTime": "2026-05-17T16:09:37.676517Z",
+  "run": {
+    "runId": "0e6d89a4-7f29-4955-a040-0739f7c63f22",
+    "facets": {}
+  },
+  "job": {
+    "namespace": "fraud-pipeline",
+    "name": "data_validation",
+    "facets": {}
+  },
+  "inputs": [
+    {
+      "namespace": "fraud-pipeline",
+      "name": "processed_features",
+      "facets": {}
+    }
+  ],
+  "outputs": [
+    {
+      "namespace": "fraud-pipeline",
+      "name": "validated_features",
+      "facets": {}
+    }
+  ],
+  "producer": "https://github.com/ashwithaveeragoni06/mlops-assignment"
+}

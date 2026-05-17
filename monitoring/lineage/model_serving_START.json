@@ -1,0 +1,22 @@
+{
+  "eventType": "START",
+  "eventTime": "2026-05-17T16:09:49.919416Z",
+  "run": {
+    "runId": "90597d76-7d83-4fc8-aba1-eb6cdec4bb10",
+    "facets": {}
+  },
+  "job": {
+    "namespace": "fraud-pipeline",
+    "name": "model_serving",
+    "facets": {}
+  },
+  "inputs": [
+    {
+      "namespace": "fraud-pipeline",
+      "name": "fraud_model",
+      "facets": {}
+    }
+  ],
+  "outputs": [],
+  "producer": "https://github.com/ashwithaveeragoni06/mlops-assignment"
+}

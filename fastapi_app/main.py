@@ -1,11 +1,15 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from prometheus_fastapi_instrumentator import Instrumentator
 import joblib
 import pandas as pd
 import os
 
 app = FastAPI(title="Fraud Detection API", version="1.0.0")
+
+# Prometheus metrics
+Instrumentator().instrument(app).expose(app)
 
 app.add_middleware(
     CORSMiddleware,

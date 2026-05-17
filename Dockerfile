@@ -1,30 +1,37 @@
-FROM python:3.11-slim
+version: '3.8'
 
-WORKDIR /app
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
 
-RUN pip install --no-cache-dir \
-    fastapi \
-    uvicorn \
-    joblib \
-    pydantic \
-    pyyaml \
-    --retries 10 \
-    --timeout 600 \
-    -i https://pypi.org/simple/
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v2.11.1
+    ports:
+      - "5000:5000"
+    command: mlflow server --host 0.0.0.0 --port 5000
 
-RUN pip install --no-cache-dir \
-    pandas \
-    numpy \
-    scikit-learn \
-    --retries 10 \
-    --timeout 600 \
-    -i https://pypi.org/simple/
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
 
-COPY models/ ./models/
-COPY fastapi_app/ ./fastapi_app/
-COPY src/ ./src/
-COPY params.yaml .
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    depends_on:
+      - prometheus
 
-EXPOSE 8000
-
-CMD ["uvicorn", "fastapi_app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+  marquez:
+    image: marquezproject/marquez:latest
+    ports:
+      - "5001:5000"
+      - "5002:5001"
