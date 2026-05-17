@@ -1,0 +1,18 @@
+description: "Fraud Detection Prompt Tests"
+
+prompts:
+  - "What is credit card fraud detection?"
+  - "Explain what a fraud probability score of {{score}} means"
+
+providers:
+  - id: echo
+    config:
+      output: "This is a test response about fraud detection"
+
+tests:
+  - description: "Basic fraud detection question"
+    vars:
+      score: "0.85"
+    assert:
+      - type: contains
+        value: "fraud"
