@@ -1,22 +1,27 @@
 from datetime import timedelta
-from feast import FeatureView, Feature, FileSource, ValueType
-from entities import customer
+from feast import FeatureView, Field, FileSource, Entity
+from feast.types import Float32, Int64
+
+customer = Entity(
+    name="customer_id",
+    description="Customer identifier"
+)
 
 fraud_source = FileSource(
-    path="../data/processed/processed_features.csv",
-    timestamp_field="unix_time",
+    path="../data/processed/processed_features.parquet",
+    timestamp_field="event_timestamp",
 )
 
 fraud_features = FeatureView(
     name="fraud_features",
-    entities=["customer_id"],
+    entities=[customer],
     ttl=timedelta(days=90),
-    features=[
-        Feature(name="amt",          value_type=ValueType.FLOAT),
-        Feature(name="city_pop",     value_type=ValueType.FLOAT),
-        Feature(name="age",          value_type=ValueType.INT64),
-        Feature(name="transaction_hour", value_type=ValueType.INT64),
-        Feature(name="high_amount_flag", value_type=ValueType.INT64),
+    schema=[
+        Field(name="amt",              dtype=Float32),
+        Field(name="city_pop",         dtype=Float32),
+        Field(name="age",              dtype=Int64),
+        Field(name="transaction_hour", dtype=Int64),
+        Field(name="high_amount_flag", dtype=Int64),
     ],
     online=True,
     source=fraud_source,

@@ -1,0 +1,24 @@
+
+^
+@
+customer_idCustomer identifier"customer_idJfraud_detection
+ùû§Ğ ßİIùû§Ğ ßİI
+D
+&
+__dummy"
+__dummy_idJfraud_detection
+ùû§Ğ ßİIùû§Ğ ßİI1"$56caf7bc-4170-458b-91d2-9be4c48e8abd*Úş§Ğ°‡¤)2ô
+½
+fraud_featuresfraud_detectioncustomer_id"
+amt"
+city_pop"
+age"
+transaction_hour"
+high_amount_flag2€ÎÚ:¦event_timestampZ.,../data/processed/processed_features.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢,../data/processed/processed_features.parquet@b
+customer_id2
+ùû§Ğ ßİIÚş§Ğ¸¨©(
+Ø°ÍÌ¸ÑÕóÿ¬©ĞRœ
+™
+,feast.infra.online_stores.sqlite.SqliteTable"i
+GC:\Users\ashug\Desktop\mlops-assignment\feast_repo\data\online_store.dbfraud_detection_fraud_featuresb¸event_timestampZ.,../data/processed/processed_features.parquetŠ1feast.infra.offline_stores.file_source.FileSource¢,../data/processed/processed_features.parquetªfraud_detectionz7
+fraud_detection$30da1886-3e1c-4496-899b-05161af6944a
