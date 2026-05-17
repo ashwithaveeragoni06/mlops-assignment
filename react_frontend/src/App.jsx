@@ -5,15 +5,16 @@ const API_URL = 'http://localhost:8000'
 
 export default function App() {
   const [form, setForm] = useState({
-    merchant: 100, category: 5, amt: 50,
+    merchant: 100, category: 5, amt: 70,
     gender: 1, city: 200, state: 10,
-    zip: 50000, lat: 0.5, long: -0.5,
-    city_pop: 0.3, job: 150, unix_time: 0.1,
-    merch_lat: 0.5, merch_long: -0.5,
+    zip: 50000, lat: 38.5, long: -90.2,
+    city_pop: 89057, job: 150,
+    unix_time: 1344905832,
+    merch_lat: 38.5, merch_long: -90.2,
     transaction_hour: 14, transaction_day: 15,
     transaction_month: 6, transaction_year: 2023,
     transaction_dayofweek: 2, weekend_transaction: 0,
-    night_transaction: 0, age: 0.2,
+    night_transaction: 0, age: 52,
     high_amount_flag: 0, large_city_flag: 1
   })
   const [result, setResult] = useState(null)
@@ -59,26 +60,35 @@ export default function App() {
         </h3>
 
         {[
-          ['Amount', 'amt'],
-          ['Transaction Hour', 'transaction_hour'],
-          ['Transaction Month', 'transaction_month'],
+          ['Amount ($)', 'amt'],
+          ['Age (years)', 'age'],
           ['City Population', 'city_pop'],
-          ['Age', 'age'],
+          ['Transaction Hour (0-23)', 'transaction_hour'],
+          ['Transaction Month (1-12)', 'transaction_month'],
         ].map(([label, key]) => (
           <div key={key} style={{marginBottom:10}}>
             <label style={{display:'block',
               fontSize:12, color:'#666', marginBottom:4}}>
               {label}
             </label>
-            <input
-              type="number"
-              name={key}
-              value={form[key]}
-              onChange={handleChange}
-              style={{width:'100%', padding:'8px',
-                borderRadius:6, border:'1px solid #ddd',
-                fontSize:14}}
-            />
+     <input
+  type="text"
+  name={key}
+  value={form[key]}
+  onChange={(e) => {
+    setForm(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value === ''
+        ? 0 : Number(e.target.value)
+    }))
+  }}
+  onFocus={(e) => e.target.select()}
+  placeholder={String(form[key])}
+  style={{width:'100%', padding:'8px',
+    borderRadius:6, border:'1px solid #ddd',
+    fontSize:14, color:'#000',
+    backgroundColor:'#fff'}}
+/>
           </div>
         ))}
       </div>

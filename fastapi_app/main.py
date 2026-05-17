@@ -16,42 +16,48 @@ app.add_middleware(
 
 model = None
 feature_columns = None
+scaler = None
+numerical_features = None
 
 @app.on_event("startup")
 def load_model():
-    global model, feature_columns
+    global model, feature_columns, scaler, numerical_features
     if os.path.exists("models/fraud_model.pkl"):
         model = joblib.load("models/fraud_model.pkl")
         feature_columns = joblib.load("models/feature_columns.pkl")
-        print("Model loaded successfully!")
+        scaler = joblib.load("models/scaler.pkl")
+        numerical_features = joblib.load(
+            "models/numerical_features.pkl"
+        )
+        print("Model and scaler loaded!")
     else:
-        print("No model found. Run training first.")
+        print("No model found.")
 
 class Transaction(BaseModel):
+    amt: float = 70.0
+    city_pop: float = 89057.0
+    lat: float = 38.5
+    long: float = -90.2
+    merch_lat: float = 38.5
+    merch_long: float = -90.2
+    unix_time: float = 1344905832.0
+    age: int = 52
     merchant: float = 100.0
     category: float = 5.0
-    amt: float = 0.5
     gender: float = 1.0
     city: float = 200.0
     state: float = 10.0
     zip: float = 50000.0
-    lat: float = 0.5
-    long: float = -0.5
-    city_pop: float = 0.3
     job: float = 150.0
-    unix_time: float = 0.1
-    merch_lat: float = 0.5
-    merch_long: float = -0.5
-    transaction_hour: float = 14.0
-    transaction_day: float = 15.0
-    transaction_month: float = 6.0
-    transaction_year: float = 2023.0
-    transaction_dayofweek: float = 2.0
-    weekend_transaction: float = 0.0
-    night_transaction: float = 0.0
-    age: float = 0.2
-    high_amount_flag: float = 0.0
-    large_city_flag: float = 1.0
+    transaction_hour: int = 14
+    transaction_day: int = 15
+    transaction_month: int = 6
+    transaction_year: int = 2023
+    transaction_dayofweek: int = 2
+    weekend_transaction: int = 0
+    night_transaction: int = 0
+    high_amount_flag: int = 0
+    large_city_flag: int = 1
 
 @app.get("/")
 def root():
@@ -69,11 +75,23 @@ def predict(transaction: Transaction):
     if model is None:
         raise HTTPException(
             status_code=503,
-            detail="Model not loaded. Run training first."
+            detail="Model not loaded."
         )
+
     data = pd.DataFrame([transaction.dict()])
-    prediction = int(model.predict(data)[0])
+
+    if scaler is not None:
+        data[numerical_features] = scaler.transform(
+            data[numerical_features]
+        )
+
+    for col in feature_columns:
+        if col not in data.columns:
+            data[col] = 0
+    data = data[feature_columns]
+
     probability = float(model.predict_proba(data)[0][1])
+    prediction = 1 if probability > 0.65 else 0
     return {
         "prediction": prediction,
         "fraud": "Yes" if prediction == 1 else "No",
