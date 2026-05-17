@@ -1,16 +1,32 @@
-# React + Vite
+# Credit Card Fraud Detection — MLOps Pipeline
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+End-to-end MLOps system for detecting credit card fraud.
 
-Currently, two official plugins are available:
+## Live Demo
+- FastAPI: http://localhost:8000/docs
+- React UI: http://localhost:5173
+- MLflow: http://localhost:5000
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Results
+| Metric | Score |
+|--------|-------|
+| Accuracy | 97% |
+| AUC-ROC | 0.9873 |
+| Fraud Recall | 92% |
 
-## React Compiler
+## Tech Stack
+| Layer | Tool | Purpose |
+|-------|------|---------|
+| Data versioning | DVC | Track datasets |
+| Data validation | Great Expectations | Validate data |
+| Experiment tracking | MLflow | Track training runs |
+| Model serving | FastAPI | REST API |
+| Frontend | React + Vite | Prediction UI |
+| Monitoring | Evidently AI | Drift detection |
+| CI/CD | GitHub Actions | Auto test + build |
+| Containers | Docker | Containerization |
+| Orchestration | Kubernetes | Deployment |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Quick Start
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 1. Clone repository
