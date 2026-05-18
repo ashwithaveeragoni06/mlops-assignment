@@ -34,7 +34,11 @@ echo ================================
 echo FastAPI:    http://localhost:8000/docs
 echo React:      http://localhost:5173
 echo MLflow:     http://127.0.0.1:5000
-echo Grafana:    http://localhost:3001
+echo [5/5] Starting Grafana and Prometheus...
+docker start grafana
+docker start prometheus
+timeout /t 3
+start http://localhost:3001
+echo Grafana: http://localhost:3001
 echo Prometheus: http://localhost:9090
-echo ================================
 pause
