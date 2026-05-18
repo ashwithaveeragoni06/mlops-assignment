@@ -1,18 +1,14 @@
 # Credit Card Fraud Detection — MLOps Pipeline
-
-End-to-end MLOps system for detecting credit card fraud.
-
 ## Live Demo
-- FastAPI: http://localhost:8000/docs
-- React UI: http://localhost:5173
-- MLflow: http://localhost:5000
+> **Note:** These URLs work when running locally. Start all services using Quick Start guide below.
 
-## Results
-| Metric | Score |
-|--------|-------|
-| Accuracy | 97% |
-| AUC-ROC | 0.9873 |
-| Fraud Recall | 92% |
+| Service | Local URL | Command |
+|---------|-----------|---------|
+| FastAPI Docs | http://localhost:8000/docs | `uvicorn fastapi_app.main:app` |
+| React Frontend | http://localhost:5173 | `npm run dev` |
+| MLflow UI | http://127.0.0.1:5000 | `python -m mlflow ui` |
+| Grafana | http://localhost:3001 | `docker run grafana/grafana` |
+| Prometheus | http://localhost:9090 | `docker run prom/prometheus` |
 
 ## Tech Stack
 | Layer | Tool | Purpose |
